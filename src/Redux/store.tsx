@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { chatSlice } from "./RTK/ChatsSlice";
+import { FinanceSlice } from "./RTK/FinanceSlice";
 import authReducer from "./Slice/auth/AuthSlice";
 import ContractReducer from "./Slice/Contarct/ContractSlice";
 import PmReducer from "./Slice/PM/PmSlice";
@@ -20,10 +20,10 @@ export const store = configureStore({
     pm: PmReducer,
     statusFinance: StatusReducer,
     tickets: TicketReducer,
-    [chatSlice.reducerPath]: chatSlice.reducer,
+    [FinanceSlice.reducerPath]: FinanceSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(chatSlice.middleware),
+    getDefaultMiddleware().concat(FinanceSlice.middleware),
 });
 setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;

@@ -17,6 +17,8 @@ import Login from "./Pages/Login/Login";
 import ResetPassword from "./Pages/Login/ResetPassword";
 import AllMessages from "./Pages/Messages/Messages";
 import ProjectStatus from "./Pages/ProjectStatus/ProjectStatus";
+import Reports from "./Pages/Reports/Reports";
+import ReportsDetails from "./Pages/Reports/ReportsDetails";
 import SiteSurvey from "./Pages/SiteSurvey/SiteSurvey";
 import Solution from "./Pages/Solution/Solution";
 import Tracking from "./Pages/Tracking/Tracking";
@@ -49,8 +51,9 @@ function App() {
         ) : (
           <>
             <Route path="/" element={<Home />}>
-              {/* <Route index element={<Dashbord />} />
-              <Route path=":id" element={<TicketDetails />} />
+              <Route index element={<Reports />} />
+              <Route path=":id" element={<ReportsDetails />} />
+              {/*<Route path=":id" element={<TicketDetails />} />
               <Route path="site-survey" element={<SiteSurvey />} />
               <Route path="hook" element={<FormHook newData={newData} />} />
               <Route path="utility-bill" element={<UtilityBill />} />
