@@ -30,7 +30,6 @@ export const FinanceSlice = createApi({
     }),
 
     //get Single Lead Details
-
     getSingleReport: builder.query({
       query: (id) => ({
         url: `finance/${id}`,
