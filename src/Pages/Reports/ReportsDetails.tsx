@@ -10,30 +10,136 @@ const ReportsDetails = () => {
 
   const ReportData = data?.data;
 
-  const DynamicFn = (name: string, reqData: any, money?: boolean) => {
+  const DynamicFn = (
+    name: string,
+    reqData: any,
+    money?: boolean,
+    currency?: "currency" | null
+  ) => {
     if (reqData)
       return (
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
+            bgcolor: "#26495f15 ",
+            borderRadius: 8,
+            p: ".3rem",
             mb: 0.5,
           }}
         >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              flex: "1",
+              background: "#e3e3e3",
+              padding: " .5rem 1rem",
+              borderRadius: "2rem 0 0 2rem",
+              color: "#26495f",
+              fontWeight: "900",
+            }}
+          >
             {name}
           </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              flex: "2",
+              fontWeight: "700",
+              background: "#e3e3e3",
+              padding: " .5rem 1rem",
+              borderRadius: " 0 2rem 2rem 0",
+              color: "#26495f",
+            }}
+          >
             {money ? "$" : null}
             {reqData}
+            {currency === "currency" ? "%" : null}
           </Typography>
         </Box>
       );
   };
+
+  const AddOn = () => {
+    const AllAddon = ReportData?.finance_addon?.map((item: any) => (
+      <Box
+        key={item?.id}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          bgcolor: "#26495f15 ",
+          borderRadius: 8,
+          p: ".3rem",
+          mb: 0.5,
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "1.2rem",
+            flex: "1",
+            background: "#e3e3e3",
+            padding: " .5rem 1rem",
+            borderRadius: "2rem 0 0 2rem",
+            color: "#26495f",
+            fontWeight: "900",
+          }}
+        >
+          {item?.name}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "1.2rem",
+            flex: "2",
+            fontWeight: "700",
+            background: "#e3e3e3",
+            padding: " .5rem 1rem",
+            borderRadius: " 0 2rem 2rem 0",
+            color: "#26495f",
+          }}
+        >
+          {item?.total}
+        </Typography>
+      </Box>
+    ));
+
+    return AllAddon;
+  };
+
+  const AddOnCost = ReportData?.finance_addon?.reduce(
+    (prev: any, next: any) => prev + next.total,
+    0
+  );
+
+  const TotalAddrCost = () => {
+    return (
+      ReportData?.project_adder?.attic_run +
+      ReportData?.project_adder?.bird_netting +
+      ReportData?.project_adder?.de_rate +
+      ReportData?.project_adder?.designated_plugs +
+      ReportData?.project_adder?.ducting +
+      ReportData?.project_adder?.energy_efficient +
+      ReportData?.project_adder?.ev_charger +
+      ReportData?.project_adder?.ev_mlo +
+      ReportData?.project_adder?.led_lighting +
+      ReportData?.project_adder?.meter_socket +
+      ReportData?.project_adder?.mpu_relocation +
+      ReportData?.project_adder?.online_monitoring +
+      ReportData?.project_adder?.solar_lip +
+      ReportData?.project_adder?.sub_panel +
+      ReportData?.project_adder?.tree_trimming +
+      ReportData?.project_adder?.trenching_concrete +
+      ReportData?.project_adder?.trenching_dirt +
+      ReportData?.project_adder?.warranty
+    );
+  };
+
+  const TotalCostAmount = () => {
+    return TotalAddrCost() + AddOnCost + ReportData?.solar_sys_total_cost;
+  };
+
+  const AccualRoyalitis = TotalCostAmount() - ReportData?.net_contract_amount;
+
+  const Advanced = 1000;
 
   if (isError) return <h2>Somthing went Wrong</h2>;
 
@@ -46,203 +152,83 @@ const ReportsDetails = () => {
         sx={{
           background: "#fff ",
           p: 2,
-          borderRadius: 2,
+          borderRadius: 8,
           mb: 2,
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         }}
       >
-        <Typography variant="h5" mb={3}>
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
           Commission Sales{" "}
         </Typography>
 
+        {DynamicFn(" Customer Name", ReportData?.customer_name)}
+        {DynamicFn(" Address", ReportData?.customer_address)}
+        {DynamicFn(" Sales Rep", ReportData?.sales_rep)}
+        {DynamicFn("Terms of Argeement", ReportData?.ppw)}
+        {DynamicFn("Finance Company", ReportData?.finance_company)}
+        {DynamicFn("Dealars Fee", ReportData?.dealer_fee, false, "currency")}
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
+            bgcolor: "#26495f15 ",
+            borderRadius: 8,
+            p: ".3rem",
             mb: 0.5,
           }}
         >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Customer Name{" "}
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.customer_name}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Address
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.customer_address}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Sales Rep{" "}
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.sales_rep}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Terms of Argeement
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.ppw}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Contract Gross Amount
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            ${ReportData?.contract_gross_amount}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Finance Company
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.finance_company}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              flex: "1",
+              background: "#e3e3e3",
+              padding: " .5rem 1rem",
+              borderRadius: "2rem 0 0 2rem",
+              color: "#26495f",
+              fontWeight: "900",
+            }}
+          >
             Rate / Term
           </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              flex: "2",
+              fontWeight: "700",
+              background: "#e3e3e3",
+              padding: " .5rem 1rem",
+              borderRadius: " 0 2rem 2rem 0",
+              color: "#26495f",
+            }}
+          >
             {ReportData?.rate} {ReportData?.term}
           </Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Dealars Fee
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.dealer_fee}%
-          </Typography>
-        </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Net Contract Amount
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            ${ReportData?.net_contract_amount}
-          </Typography>
-        </Box>
+        {DynamicFn(
+          " Contract Gross Amount",
+          ReportData?.contract_gross_amount,
+          true
+        )}
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Requested Royaltis
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            ${ReportData?.requested_royalties}
-          </Typography>
-        </Box>
+        {DynamicFn("Requested Royaltis", ReportData?.requested_royalties, true)}
+        {DynamicFn(
+          "Net Contract Amount",
+          ReportData?.net_contract_amount,
+          true
+        )}
       </Box>
 
       {/* solar system  */}
@@ -250,90 +236,34 @@ const ReportsDetails = () => {
         sx={{
           background: "#fff ",
           p: 2,
-          borderRadius: 2,
+          borderRadius: 8,
           mb: 2,
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         }}
       >
-        <Typography variant="h5" mb={3}>
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
           Solar System
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            No of Panels
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.solar_sys_no_of_panels}
-          </Typography>
-        </Box>
+        {DynamicFn("No of Panels", ReportData?.solar_sys_no_of_panels)}
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Wattage
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.solar_sys_wattage}
-          </Typography>
-        </Box>
+        {DynamicFn("Wattage", ReportData?.solar_sys_wattage)}
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            System Size
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            {ReportData?.solar_sys_size}
-          </Typography>
-        </Box>
+        {DynamicFn("System Size", ReportData?.solar_sys_size)}
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            bgcolor: "#eeeeee",
-            p: 1,
-            borderRadius: 2,
-            mb: 0.5,
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem", width: "25%" }}>
-            Total Cost
-          </Typography>
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: "700" }}>
-            ${ReportData?.solar_sys_total_cost}
-          </Typography>
-        </Box>
+        {DynamicFn("Total Cost", ReportData?.solar_sys_total_cost)}
       </Box>
 
       {/* Roofing system  */}
@@ -341,12 +271,24 @@ const ReportsDetails = () => {
         sx={{
           background: "#fff ",
           p: 2,
-          borderRadius: 2,
+          borderRadius: 8,
           mb: 2,
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         }}
       >
-        <Typography variant="h5" mb={3}>
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
           Roofing System
         </Typography>
         {DynamicFn("No of Squares", ReportData?.roofing_no_of_squares)}
@@ -362,12 +304,24 @@ const ReportsDetails = () => {
         sx={{
           background: "#fff ",
           p: 2,
-          borderRadius: 2,
+          borderRadius: 8,
           mb: 2,
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         }}
       >
-        <Typography variant="h5" mb={3}>
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
           Adders
         </Typography>
         {DynamicFn("Attic Run", ReportData?.project_adder?.attic_run, true)}
@@ -428,6 +382,68 @@ const ReportsDetails = () => {
           true
         )}
         {DynamicFn("warranty", ReportData?.project_adder?.warranty, true)}
+        {DynamicFn("Total Adders Cost", TotalAddrCost(), true)}
+      </Box>
+
+      {/* Addon contract */}
+      <Box
+        sx={{
+          background: "#fff ",
+          p: 2,
+          borderRadius: 8,
+          mb: 2,
+          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        }}
+      >
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
+          Addon
+        </Typography>
+        {AddOn()}
+        {DynamicFn("Addon Cost", AddOnCost, true)}
+      </Box>
+
+      {/* finanlce contract */}
+      <Box
+        sx={{
+          background: "#fff ",
+          p: 2,
+          borderRadius: 8,
+          mb: 2,
+          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        }}
+      >
+        <Typography
+          variant="h5"
+          mb={3}
+          sx={{
+            borderRadius: "4rem",
+            textAlign: "center",
+            fontWeight: "900",
+            border: "1px solid",
+            padding: "0.5rem",
+            background: "#26495f",
+            color: "#fff",
+          }}
+        >
+          inital report finance
+        </Typography>
+        {DynamicFn(" Total Cost", TotalCostAmount(), true)}
+
+        {DynamicFn("Accual Royalitis", Math.ceil(AccualRoyalitis), true)}
+        {DynamicFn("Advance", Advanced, true)}
+        {/* {DynamicFn("Net", ReportData?.requested_royalties, true)} */}
       </Box>
     </>
   );
