@@ -22,7 +22,7 @@ const ReportsDetails = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            bgcolor: "#26495f15 ",
+            // bgcolor: "#26495f15 ",
             borderRadius: 8,
             p: ".3rem",
             mb: 0.5,
@@ -81,7 +81,7 @@ const ReportsDetails = () => {
             padding: " .5rem 1rem",
             borderRadius: "2rem 0 0 2rem",
             color: "#26495f",
-            fontWeight: "900",
+            fontWeight: "600",
           }}
         >
           {item?.name}
@@ -90,11 +90,11 @@ const ReportsDetails = () => {
           sx={{
             fontSize: "1.2rem",
             flex: "2",
-            fontWeight: "700",
+            fontWeight: "400",
             background: "#e3e3e3",
             padding: " .5rem 1rem",
             borderRadius: " 0 2rem 2rem 0",
-            color: "#26495f",
+            color: "#8aa2b1",
           }}
         >
           {item?.total}
@@ -137,7 +137,7 @@ const ReportsDetails = () => {
     return TotalAddrCost() + AddOnCost + ReportData?.solar_sys_total_cost;
   };
 
-  const AccualRoyalitis = TotalCostAmount() - ReportData?.net_contract_amount;
+  const AccualRoyalitis = ReportData?.net_contract_amount - TotalCostAmount();
 
   const DateFrom = new Date(`${ReportData?.created_at}`).toDateString();
 
@@ -300,6 +300,172 @@ const ReportsDetails = () => {
         {DynamicFn("Roofing Type", ReportData?.roofing_type)}
         {DynamicFn("Roofing Type Cost", ReportData?.roofing_type_cost)}
         {DynamicFn("Total Cost", ReportData?.roofing_total_cost)}
+        {DynamicFn(
+          "Air Eent Replacement Cost",
+          ReportData?.roofing_proposal?.air_vent_replacement_cost,
+          true
+        )}
+        {DynamicFn("Broken Tiles", ReportData?.roofing_proposal?.broken_tiles)}
+        {DynamicFn(
+          "Carbon Detectors",
+          ReportData?.roofing_proposal?.carbon_detectors
+        )}
+        {DynamicFn(
+          "Double Handed Squares",
+          ReportData?.roofing_proposal?.double_handed_squares
+        )}
+        {DynamicFn(
+          "Double Handed Squares Cost",
+          ReportData?.roofing_proposal?.double_hands_cost,
+          true
+        )}
+        {DynamicFn(
+          "Existing Material",
+          ReportData?.roofing_proposal?.existing_material
+        )}
+        {DynamicFn(
+          "Existing Squares",
+          ReportData?.roofing_proposal?.existing_squares
+        )}
+        {DynamicFn("Fascia Feet", ReportData?.roofing_proposal?.fascia_feet)}
+        {DynamicFn(
+          "Fascia  Cost",
+          ReportData?.roofing_proposal?.fascia_cost,
+          true
+        )}
+        {DynamicFn(
+          "HVAC Replace Cost",
+          ReportData?.roofing_proposal?.hvac_replace_cost,
+          true
+        )}
+        {DynamicFn(
+          "HVAC Replace Cost",
+          ReportData?.roofing_proposal?.hvac_replace_cost,
+          true
+        )}
+        {DynamicFn("Hvac Units", ReportData?.roofing_proposal?.hvac_units)}
+        {DynamicFn(
+          "Job Planes Cost",
+          ReportData?.roofing_proposal?.job_planes_cost,
+          true
+        )}
+        {DynamicFn("Job Type", ReportData?.roofing_proposal?.job_type)}
+        {DynamicFn(
+          "Job Type Cost",
+          ReportData?.roofing_proposal?.job_type_cost,
+          true
+        )}
+        {DynamicFn("layers", ReportData?.roofing_proposal?.layers, true)}
+        {DynamicFn("material", ReportData?.roofing_proposal?.material)}
+        {DynamicFn(
+          "Material Cost",
+          ReportData?.roofing_proposal?.material_cost
+        )}
+        {DynamicFn(
+          "Monoxide Detectors Cost",
+          ReportData?.roofing_proposal?.monoxide_detectors_cost,
+          true
+        )}
+        {DynamicFn(
+          "new_vent_cost",
+          ReportData?.roofing_proposal?.new_vent_cost,
+          true
+        )}
+        {DynamicFn("New Vents", ReportData?.roofing_proposal?.new_vents)}
+        {DynamicFn("Pitch Degree", ReportData?.roofing_proposal?.pitch_degree)}
+        {DynamicFn(
+          "plan_broken_tiles",
+          ReportData?.roofing_proposal?.plan_broken_tiles
+        )}
+        {DynamicFn(
+          "plan_existing_material",
+          ReportData?.roofing_proposal?.plan_existing_material
+        )}
+        {DynamicFn(
+          "plan_existing_material_cost",
+          ReportData?.roofing_proposal?.plan_existing_material_cost
+        )}
+        {DynamicFn(
+          "plan_existing_squares",
+          ReportData?.roofing_proposal?.plan_existing_squares
+        )}
+        {DynamicFn(
+          "Plan Job Type",
+          ReportData?.roofing_proposal?.plan_job_type
+        )}
+        {DynamicFn(
+          "Plan Job Type Cost",
+          ReportData?.roofing_proposal?.plan_job_type_cost,
+          true
+        )}
+        {DynamicFn("plan layers", ReportData?.roofing_proposal?.plan_layers)}
+        {DynamicFn(
+          "plan material",
+          ReportData?.roofing_proposal?.plan_material
+        )}
+        {DynamicFn(
+          "plan material cost",
+          ReportData?.roofing_proposal?.plan_material_cost
+        )}
+        {DynamicFn(
+          "plan pitch degree",
+          ReportData?.roofing_proposal?.plan_pitch_degree
+        )}
+        {DynamicFn("plan_squares", ReportData?.roofing_proposal?.plan_squares)}
+        {DynamicFn(
+          "plan steep squares",
+          ReportData?.roofing_proposal?.plan_steep_squares
+        )}
+        {DynamicFn("rafter cost", ReportData?.roofing_proposal?.rafter_cost)}
+        {DynamicFn("rafter feet", ReportData?.roofing_proposal?.rafter_feet)}
+        {DynamicFn(
+          "redecking cost",
+          ReportData?.roofing_proposal?.redecking_cost,
+          true
+        )}
+        {DynamicFn(
+          "Redecking Squares",
+          ReportData?.roofing_proposal?.redecking_squares
+        )}
+        {DynamicFn(
+          "reroof_plan_material",
+          ReportData?.roofing_proposal?.reroof_plan_material
+        )}
+        {DynamicFn(
+          "reroof plan material cost",
+          ReportData?.roofing_proposal?.reroof_plan_material_cost,
+          true
+        )}
+        {DynamicFn(
+          "reroof plan squares",
+          ReportData?.roofing_proposal?.reroof_plan_squares
+        )}
+        {DynamicFn(
+          "roof_royalties",
+          ReportData?.roofing_proposal?.roof_royalties
+        )}
+        {DynamicFn(
+          "smoke_detectors",
+          ReportData?.roofing_proposal?.smoke_detectors
+        )}
+        {DynamicFn(
+          "smoke_monitors_cost",
+          ReportData?.roofing_proposal?.smoke_monitors_cost,
+          true
+        )}
+        {DynamicFn("squares", ReportData?.roofing_proposal?.squares)}
+        {DynamicFn(
+          "steep_squares",
+          ReportData?.roofing_proposal?.steep_squares
+        )}
+        {DynamicFn(
+          "total_job_type_cost",
+          ReportData?.roofing_proposal?.total_job_type_cost
+        )}
+        {DynamicFn(
+          "vent_replacement",
+          ReportData?.roofing_proposal?.vent_replacement
+        )}
       </Box>
 
       {/* Adders system  */}
