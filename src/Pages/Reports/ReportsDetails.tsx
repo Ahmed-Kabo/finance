@@ -139,6 +139,8 @@ const ReportsDetails = () => {
 
   const AccualRoyalitis = TotalCostAmount() - ReportData?.net_contract_amount;
 
+  const DateFrom = new Date(`${ReportData?.created_at}`).toDateString();
+
   const Advanced = 1000;
 
   if (isError) return <h2>Somthing went Wrong</h2>;
@@ -179,6 +181,7 @@ const ReportsDetails = () => {
         {DynamicFn("Terms of Argeement", ReportData?.ppw)}
         {DynamicFn("Finance Company", ReportData?.finance_company)}
         {DynamicFn("Dealars Fee", ReportData?.dealer_fee, false, "currency")}
+        {DynamicFn("Created", DateFrom)}
         <Box
           sx={{
             display: "flex",
@@ -441,7 +444,7 @@ const ReportsDetails = () => {
         </Typography>
         {DynamicFn(" Total Cost", TotalCostAmount(), true)}
 
-        {DynamicFn("Accual Royalitis", Math.ceil(AccualRoyalitis), true)}
+        {DynamicFn("Actual Royalties", Math.ceil(AccualRoyalitis), true)}
         {DynamicFn("Advance", Advanced, true)}
         {/* {DynamicFn("Net", ReportData?.requested_royalties, true)} */}
       </Box>
