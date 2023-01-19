@@ -12,14 +12,17 @@ export const GlobalStyled = createGlobalStyle`
     }
     ::-webkit-scrollbar {
         width: 10px;
-        color: var(--mainColor);
+        color: var(--black);
+        background: #eee;
     }
     ::-webkit-scrollbar-track {
-        border-radius: 10px;
+        /* background: #000; */
+        
     }
     ::-webkit-scrollbar-thumb {
-        color: var(--mainColor); 
-        border-radius: 10px;
+        /* color: var(--mainColor);  */
+        background: #26495f;
+        
         
     }
     *{
