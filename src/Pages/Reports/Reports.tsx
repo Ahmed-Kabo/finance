@@ -26,7 +26,7 @@ const Reports = () => {
       </Typography>
       <Grid container spacing={3}>
         {allReports?.map((item: any) => (
-          <Grid item md={6} lg={4} xs={12} key={item.id}>
+          <Grid item md={6} lg={6} xs={12} key={item.id}>
             <Link to={`${item?.opportunity_id}`}>
               <Box
                 sx={{
