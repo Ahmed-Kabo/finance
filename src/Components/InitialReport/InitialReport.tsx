@@ -1,13 +1,13 @@
-import { Box, Pagination, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { DynamicFn, HandleCardDetails } from "../../Helper/ReportHeadings";
 import { useGetSingleReportQuery } from "../../Redux/RTK/FinanceSlice";
 
 const InitialReport = () => {
-  //---------------//
   const { id } = useParams();
+
   const { data, isLoading, isError } = useGetSingleReportQuery(id);
+
   const ReportData = data?.data;
 
   const AddOn = () => {
@@ -132,8 +132,40 @@ const InitialReport = () => {
         {DynamicFn("Finance Company", ReportData?.finance_company)}
         {DynamicFn("Dealars Fee", ReportData?.dealer_fee, false, "currency")}
         {DynamicFn("Created", DateFrom)}
-        {DynamicFn("Rate", ReportData?.rate)}
-        {DynamicFn("Term", ReportData?.term)}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            bgcolor: "#26495f15 ",
+
+            p: ".5rem",
+            mb: 0.5,
+          }}
+        >
+          <Typography
+            sx={{
+              borderRadius: "2rem 0 0 2rem",
+              color: "#26495f",
+              fontWeight: "700",
+              flex: "1",
+            }}
+          >
+            Rate / Term
+          </Typography>
+          <Typography
+            sx={{
+              flex: "1",
+              fontWeight: "400",
+
+              borderRadius: " 0 2rem 2rem 0",
+              color: "#26495f",
+            }}
+          >
+            {ReportData?.rate} {ReportData?.term}
+          </Typography>
+        </Box>
+        {/* {DynamicFn("Rate", ReportData?.rate)}
+        {DynamicFn("Term", ReportData?.term)} */}
         {DynamicFn(
           " Contract Gross Amount",
           ReportData?.contract_gross_amount,

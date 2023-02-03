@@ -124,13 +124,14 @@ const Reports = () => {
           display: "flex",
           flexDirection: "row",
           width: "100%",
-          mx: 5,
+          my: 5,
+
           justifyContent: "flex-end",
         }}
       >
         <Pagination
           color="primary"
-          count={Math.floor(data?.data?.total / 10)}
+          count={Math.ceil(data?.data?.total / 10)}
           page={page}
           onChange={handleChange}
         />
