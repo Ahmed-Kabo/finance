@@ -1,16 +1,18 @@
-import {
-  AccountCircle,
-  Business,
-  CorporateFare,
-  DateRange,
-  SolarPower,
-} from "@mui/icons-material";
-import { Box, Grid, Typography } from "@mui/material";
+import { AccountCircle, Business, DateRange } from "@mui/icons-material";
+import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetReportQuery } from "../../Redux/RTK/FinanceSlice";
 
 const Reports = () => {
-  const { isLoading, data, isError } = useGetReportQuery({});
+  // start paginantion
+
+  const [page, setPage] = useState<number>(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  const { isLoading, data, isError } = useGetReportQuery(page);
 
   const allReports = data?.data?.data;
 
@@ -19,10 +21,13 @@ const Reports = () => {
   if (isLoading) {
     return <h2>loading...</h2>;
   }
+  if (!Boolean(allReports.length)) {
+    return <h2>There is no Report Yet</h2>;
+  }
   return (
     <Box sx={{ m: 3 }}>
-      <Typography variant="h3" mb={2}>
-        initial reports
+      <Typography variant="h4" mb={2}>
+        Initial Reports ({data?.data?.total})
       </Typography>
       <Grid container spacing={3}>
         {allReports?.map((item: any) => (
@@ -111,6 +116,25 @@ const Reports = () => {
           </Grid>
         ))}
       </Grid>
+
+      {/* start pagination  */}
+      <Stack
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          mx: 5,
+          justifyContent: "flex-end",
+        }}
+      >
+        <Pagination
+          color="primary"
+          count={Math.floor(data?.data?.total / 10)}
+          page={page}
+          onChange={handleChange}
+        />
+      </Stack>
     </Box>
   );
 };

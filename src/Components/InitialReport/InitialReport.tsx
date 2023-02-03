@@ -1,59 +1,14 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { HandleCardDetails } from "../../Helper/ReportHeadings";
+import { DynamicFn, HandleCardDetails } from "../../Helper/ReportHeadings";
 import { useGetSingleReportQuery } from "../../Redux/RTK/FinanceSlice";
 
 const InitialReport = () => {
+  //---------------//
   const { id } = useParams();
-
   const { data, isLoading, isError } = useGetSingleReportQuery(id);
-
   const ReportData = data?.data;
-
-  const DynamicFn = (
-    name: string,
-    reqData: any,
-    money?: boolean,
-    currency?: "currency" | null
-  ) => {
-    if (reqData)
-      return (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            bgcolor: "#26495f15 ",
-
-            p: " .5rem .5rem",
-            mb: 0.5,
-          }}
-        >
-          <Typography
-            sx={{
-              flex: "1",
-              borderRadius: "2rem 0 0 2rem",
-              color: "#26495f",
-              fontWeight: "600",
-              textTransform: "capitalize",
-            }}
-          >
-            {name}
-          </Typography>
-          <Typography
-            sx={{
-              flex: "1",
-              fontWeight: "400",
-              borderRadius: " 0 2rem 2rem 0",
-              color: "#26495f",
-            }}
-          >
-            {money ? "$" : null}
-            {reqData}
-            {currency === "currency" ? "%" : null}
-          </Typography>
-        </Box>
-      );
-  };
 
   const AddOn = () => {
     const AllAddon = ReportData?.finance_addon?.map((item: any) => (
@@ -146,8 +101,6 @@ const InitialReport = () => {
     }
   };
 
-  console.log("RoofingCost", RoofingCost());
-
   const TotalCostAmount = () => {
     return (
       TotalAddrCost() +
@@ -179,38 +132,8 @@ const InitialReport = () => {
         {DynamicFn("Finance Company", ReportData?.finance_company)}
         {DynamicFn("Dealars Fee", ReportData?.dealer_fee, false, "currency")}
         {DynamicFn("Created", DateFrom)}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            bgcolor: "#26495f15 ",
-
-            p: ".5rem",
-            mb: 0.5,
-          }}
-        >
-          <Typography
-            sx={{
-              borderRadius: "2rem 0 0 2rem",
-              color: "#26495f",
-              fontWeight: "700",
-              flex: "1",
-            }}
-          >
-            Rate / Term
-          </Typography>
-          <Typography
-            sx={{
-              flex: "1",
-              fontWeight: "400",
-
-              borderRadius: " 0 2rem 2rem 0",
-              color: "#26495f",
-            }}
-          >
-            {ReportData?.rate} {ReportData?.term}
-          </Typography>
-        </Box>
+        {DynamicFn("Rate", ReportData?.rate)}
+        {DynamicFn("Term", ReportData?.term)}
         {DynamicFn(
           " Contract Gross Amount",
           ReportData?.contract_gross_amount,
