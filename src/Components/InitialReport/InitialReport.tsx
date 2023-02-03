@@ -156,7 +156,6 @@ const InitialReport = () => {
             sx={{
               flex: "1",
               fontWeight: "400",
-
               borderRadius: " 0 2rem 2rem 0",
               color: "#26495f",
             }}
