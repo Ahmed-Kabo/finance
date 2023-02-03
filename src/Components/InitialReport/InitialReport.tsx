@@ -93,8 +93,7 @@ const InitialReport = () => {
         +ReportData?.roofing_proposal?.monoxide_detectors_cost +
         +ReportData?.roofing_proposal?.total_job_type_cost +
         +ReportData?.roofing_proposal?.job_planes_cost +
-        +ReportData?.roofing_proposal?.new_roofing_cost +
-        +ReportData?.roofing_proposal?.job_planes_cost
+        +ReportData?.roofing_proposal?.new_roofing_cost
       );
     } else {
       return 0;
