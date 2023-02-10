@@ -19,11 +19,12 @@ export const FinanceSlice = createApi({
   endpoints: (builder) => ({
     //start  get all signed conatct
     getReport: builder.query({
-      query: (page) => ({
+      query: ({ page, keyword }) => ({
         url: "finance",
         method: "GET",
         params: {
           page: page,
+          keyword: keyword,
         },
       }),
       providesTags: ["finance"],

@@ -14,24 +14,12 @@ import Home from "./Pages/Home/Home";
 import CheckMail from "./Pages/Login/CheckMail";
 import ForgetPassword from "./Pages/Login/ForgetPassword";
 import Login from "./Pages/Login/Login";
-import ResetPassword from "./Pages/Login/ResetPassword";
-import AllMessages from "./Pages/Messages/Messages";
-import ProjectStatus from "./Pages/ProjectStatus/ProjectStatus";
 import Reports from "./Pages/Reports/Reports";
 import ReportsDetails from "./Pages/Reports/ReportsDetails";
-import SiteSurvey from "./Pages/SiteSurvey/SiteSurvey";
-import Solution from "./Pages/Solution/Solution";
-import Tracking from "./Pages/Tracking/Tracking";
-import UtilityBill from "./Pages/UtilityBill/UtilityBill";
 import { GlobalStyled } from "./styles/GlopleStyled";
 
 function App() {
   const { mainUser } = useAppSelector((state) => state.auth);
-
-  const newData: any = {
-    salary: 2,
-    tax: 1,
-  };
 
   return (
     <>

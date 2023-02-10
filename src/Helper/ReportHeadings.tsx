@@ -23,7 +23,7 @@ export const HandleCardDetails = ({ title, children }: Tcard) => {
           fontWeight: "700",
           border: "1px solid",
           padding: "0.5rem",
-          background: "#26495f",
+          background: "#306382e8",
           color: "#fff",
           top: 10,
         }}
