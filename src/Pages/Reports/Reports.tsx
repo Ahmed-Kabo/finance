@@ -181,7 +181,13 @@ const Reports = () => {
       </Box>
 
       <Grid container spacing={3}>
-        {isLoading || isFetching ? <h2>loading...</h2> : AllList()}
+        {isLoading || isFetching ? (
+          <Typography p={5} variant="h4">
+            Loading...
+          </Typography>
+        ) : (
+          AllList()
+        )}
       </Grid>
 
       {/* start pagination  */}

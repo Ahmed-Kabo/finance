@@ -25,6 +25,9 @@ const ReportsDetails = () => {
             ".Mui-selected": {
               background: "#26495f",
               color: "#fff",
+              "&.MuiTouchRipple-root": {
+                color: "#FFF",
+              },
             },
             ".MuiTabs-indicator": {
               display: "none",
