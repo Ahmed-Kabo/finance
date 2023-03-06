@@ -9,7 +9,7 @@ import SolutionsReducer from "./Slice/Solutions/SolutionsSlice";
 import StatusReducer from "./Slice/Status/StatusSlice";
 import TicketReducer from "./Slice/Tickets/TicketsSlics";
 import utilityBillReducer from "./Slice/UtitityBill/UtilityBillSlice";
-
+import { pmSlice } from "./RTK/pmSLice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -21,9 +21,10 @@ export const store = configureStore({
     statusFinance: StatusReducer,
     tickets: TicketReducer,
     [FinanceSlice.reducerPath]: FinanceSlice.reducer,
+    [pmSlice.reducerPath]: pmSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(FinanceSlice.middleware),
+    getDefaultMiddleware().concat(FinanceSlice.middleware, pmSlice.middleware),
 });
 setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;

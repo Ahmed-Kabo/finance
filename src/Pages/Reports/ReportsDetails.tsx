@@ -1,5 +1,6 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
+import FinalReport from "../../Components/FinalReport/FinalReport";
 import InitialReport from "../../Components/InitialReport/InitialReport";
 
 const ReportsDetails = () => {
@@ -60,6 +61,7 @@ const ReportsDetails = () => {
       </Box>
 
       {value === "one" && <InitialReport />}
+      {value === "two" && <FinalReport />}
     </>
   );
 };
